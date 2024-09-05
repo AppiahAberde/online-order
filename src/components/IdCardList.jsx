@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ProductCard from './ProductCard';
+import IdCardProductList from './IdCardProductCard'
 
-const ProductList = () => {
+const IdCardList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/products')
+    axios.get('http://10.10.10.205:3001/lcs/idcard')
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);
@@ -14,10 +14,10 @@ const ProductList = () => {
   return (
     <div className="product-list">
       {products.map((product, index) => (
-        <ProductCard key={index} product={product} />
+        <IdCardProductList key={index} product={product} />
       ))}
     </div>
   );
 };
 
-export default ProductList;
+export default IdCardList;

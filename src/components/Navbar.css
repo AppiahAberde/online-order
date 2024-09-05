@@ -1,0 +1,34 @@
+.navbar {
+    position: relative;
+    top: 0;
+    width: 100%;
+    background-color: #5257d2;
+    color: rgb(53, 60, 159);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.2rem;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  .cart-count {
+    background-color: red;
+    border-radius: 50%;
+    padding: 2px 8px;
+    margin-left: 5px;
+    font-size: 0.8rem;
+    color: white;
+  }
+  
