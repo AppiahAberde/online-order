@@ -6,7 +6,7 @@ const AsaActivityList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://10.10.10.205:3001/lcs/asaactivity')
+    axios.get('http://208.109.246.182:3000/lcs/asaactivity')
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);

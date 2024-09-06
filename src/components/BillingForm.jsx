@@ -42,7 +42,7 @@ const BillingForm = () => {
         const config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'http://10.10.10.205:3001/lcs/initiate',
+            url: 'http://208.109.246.182:3000/lcs/initiate',
             headers: {
                 'Content-Type': 'application/json',
             },
