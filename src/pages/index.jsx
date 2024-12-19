@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import bgImg from '../images/Receivables listing for Paystack - website_Home Banner.jpg'
 import '../App.css';  // Make sure to create and import the CSS file
 
 function Index() {
@@ -15,31 +14,47 @@ function Index() {
   };
 
   const goToRentalPage = () => {
-    navigate('/rental')
-  }
+    navigate('/rental');
+  };
 
   const goToIdCard = () => {
-    navigate('idcard')
-  }
-
-  // go to rental and id card page
+    navigate('idcard');
+  };
 
   return (
-    <div className="index-container" style ={{
-      backgroundImage: `url(${bgImg})`
-    }}>
-      <h1 className="display-5" style={{color: 'white'}}>Welcome</h1>
-      <div className="button-row">
-        <button className="custom-button" onClick={goToTripPage}><p className='lead'>FieldTrips</p></button>
-        <button className="custom-button" onClick={goToAsaPage}><p className='lead'>After School Activity</p></button>
-        <button className="custom-button" onClick={goToRentalPage}><p className='lead'>Laptop Rentals</p></button>
-        <button className="custom-button" onClick={goToIdCard}><p className='lead'>ID Card Replacement</p></button>
+    <div className="index-container">
+      {/* Header Section with Logo */}
+      <header className="header">
+        <img src="logo.png" alt="Logo" className="logo" /> {/* Add your logo file */}
+        <h1 className="welcome-title">Welcome to Our Services</h1>
+      </header>
+
+      {/* Interactive Button Section */}
+      <div className="services-grid">
+        <div className="service-card" onClick={goToTripPage}>
+          <img src="" alt="FieldTrips" className="service-icon" />
+          <h2>Field Trips</h2>
+          <p>Explore and manage field trips</p>
+        </div>
+
+        <div className="service-card" onClick={goToAsaPage}>
+          <img src="https://182.246.109.208.host.secureserver.net/static/media/Receivables%20listing%20for%20Paystack%20Tabs-07.jpg" alt="After School Activity" className="service-icon" />
+          <h2>After School Activities</h2>
+          <p>Sign up for after-school programs</p>
+        </div>
+
+        <div className="service-card" onClick={goToRentalPage}>
+          <img src="laptop-icon.png" alt="Laptop Rentals" className="service-icon" />
+          <h2>Laptop Rentals</h2>
+          <p>Rent a laptop for your projects</p>
+        </div>
+
+        <div className="service-card" onClick={goToIdCard}>
+          <img src="idcard-icon.png" alt="ID Card Replacement" className="service-icon" />
+          <h2>ID Card Replacement</h2>
+          <p>Request a replacement for your ID card</p>
+        </div>
       </div>
-      {/* <div className="button-row">
-        <button className="custom-button" onClick={goToTripPage}><p className='lead'>FieldTrips</p></button>
-        <button className="custom-button" onClick={goToAsaPage}><p className='lead'>After School Activity</p></button>
-        <button className="custom-button" onClick={goToRentalPage}><p className='lead'>Laptop Rentals</p></button>
-      </div> */}
     </div>
   );
 }

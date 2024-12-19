@@ -42,7 +42,7 @@ const BillingForm = () => {
         const config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'http://208.109.246.182:3000/lcs/initiate',
+            url: 'https://182.246.109.208.host.secureserver.net/api/lcs/initiate',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -62,7 +62,7 @@ const BillingForm = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div className='form-row'>
+                <div className='form-row mb-5'>
                     <div className='form-floating col-md'>
                         <span><label>Student First Name</label></span>
                         <input
@@ -90,6 +90,7 @@ const BillingForm = () => {
                 </div>
                 <div className='row'>
                     <div className='col-4'>
+                        <span><label>Grade</label></span>
                         <select
                             className="form-select form-select-lg mb-3"
                             aria-label="Select Grade"

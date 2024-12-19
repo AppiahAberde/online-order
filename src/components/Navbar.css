@@ -1,34 +1,102 @@
+/* Navbar Container */
 .navbar {
-    position: relative;
-    top: 0;
+  background: linear-gradient(90deg, #0a74da 0%, #0051a5 100%);
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  transition: background-color 0.3s ease;
+}
+
+/* Logo Section */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-text {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Menu Icon for Mobile */
+.menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-link {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-link:hover {
+  color: #00d9ff; /* Cyan accent color for hover */
+}
+
+/* Cart Icon with Count */
+.cart-link {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: #ff6347; /* Tomato red for visibility */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: -100%;
     width: 100%;
-    background-color: #5257d2;
-    color: rgb(53, 60, 159);
+    height: 100vh;
+    background-color: #0a74da; /* Keep consistent with the navbar color */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    transition: left 0.3s ease;
   }
-  
-  .nav-link {
-    color: white;
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 1.2rem;
+
+  .nav-links.active {
+    left: 0;
   }
-  
-  .nav-link:hover {
-    text-decoration: underline;
+
+  .nav-links li {
+    margin: 20px 0;
   }
-  
-  .cart-count {
-    background-color: red;
-    border-radius: 50%;
-    padding: 2px 8px;
-    margin-left: 5px;
-    font-size: 0.8rem;
-    color: white;
-  }
-  
+}
