@@ -18,7 +18,7 @@ const Navbar = () => {
       {/* Logo */}
       <Link className="logo-link" to="/">
         {/* <img src={logo} alt="Logo" className="navbar-logo" /> */}
-        <h1 className="logo-text">MyStore</h1>
+        {/* <h1 className="logo-text">MyStore</h1> */}
       </Link>
 
       {/* Menu Icon for Mobile */}
@@ -31,15 +31,15 @@ const Navbar = () => {
         <li>
           <Link className="nav-link" to="/" onClick={toggleMobileMenu}>Home</Link>
         </li>
-        <li>
+        {/* <li>
           <Link className="nav-link" to="/products" onClick={toggleMobileMenu}>Products</Link>
         </li>
         <li>
           <Link className="nav-link" to="/about" onClick={toggleMobileMenu}>About</Link>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <Link className="nav-link" to="/contact" onClick={toggleMobileMenu}>Contact</Link>
-        </li>
+        </li> */}
         <li>
           <Link className="nav-link cart-link" to="/cart" onClick={toggleMobileMenu}>
             <FontAwesomeIcon icon={faShoppingCart} />

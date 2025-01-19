@@ -6,7 +6,7 @@ const IdCardList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://182.246.109.208.host.secureserver.net/api/lcs/idcard')
+    axios.get('https://lincolnpay.lincoln.edu.gh/api/lcs/idcard')
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);

@@ -6,7 +6,7 @@ const AsaActivityList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://182.246.109.208.host.secureserver.net/api/lcs/rental')
+    axios.get('https://lincolnpay.lincoln.edu.gh/api/lcs/rental')
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);

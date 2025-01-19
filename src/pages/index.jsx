@@ -25,32 +25,31 @@ function Index() {
     <div className="index-container">
       {/* Header Section with Logo */}
       <header className="header">
-        <img src="logo.png" alt="Logo" className="logo" /> {/* Add your logo file */}
-        <h1 className="welcome-title">Welcome to Our Services</h1>
+      <h1 className="display-5 text-white">Welcome to Our Services</h1>
       </header>
 
       {/* Interactive Button Section */}
       <div className="services-grid">
         <div className="service-card" onClick={goToTripPage}>
-          <img src="" alt="FieldTrips" className="service-icon" />
+          {/* <img src="" alt="FieldTrips" className="service-icon" /> */}
           <h2>Field Trips</h2>
           <p>Explore and manage field trips</p>
         </div>
 
         <div className="service-card" onClick={goToAsaPage}>
-          <img src="https://182.246.109.208.host.secureserver.net/static/media/Receivables%20listing%20for%20Paystack%20Tabs-07.jpg" alt="After School Activity" className="service-icon" />
+          {/* <img src="https://lincolnpay.lincoln.edu.gh/static/media/Receivables%20listing%20for%20Paystack%20Tabs-07.jpg" alt="After School Activity" className="service-icon" /> */}
           <h2>After School Activities</h2>
           <p>Sign up for after-school programs</p>
         </div>
 
         <div className="service-card" onClick={goToRentalPage}>
-          <img src="laptop-icon.png" alt="Laptop Rentals" className="service-icon" />
+          {/* <img src="laptop-icon.png" alt="Laptop Rentals" className="service-icon" /> */}
           <h2>Laptop Rentals</h2>
           <p>Rent a laptop for your projects</p>
         </div>
 
         <div className="service-card" onClick={goToIdCard}>
-          <img src="idcard-icon.png" alt="ID Card Replacement" className="service-icon" />
+          {/* <img src="idcard-icon.png" alt="ID Card Replacement" className="service-icon" /> */}
           <h2>ID Card Replacement</h2>
           <p>Request a replacement for your ID card</p>
         </div>

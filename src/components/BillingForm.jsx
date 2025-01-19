@@ -42,7 +42,7 @@ const BillingForm = () => {
         const config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://182.246.109.208.host.secureserver.net/api/lcs/initiate',
+            url: 'https://lincolnpay.lincoln.edu.gh/api/lcs/initiate',
             headers: {
                 'Content-Type': 'application/json',
             },
