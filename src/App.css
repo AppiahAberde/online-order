@@ -108,7 +108,7 @@ button:hover {
   background-color: #0056b3;
 }
 
-.back-button, .remove-button {
+.back-button{
   background-color: #dc3545;
 }
 
@@ -145,7 +145,7 @@ label {
 
 input[type="text"] {
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -174,11 +174,13 @@ button[type="submit"] {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  max-width: 500px; /* Limit maximum width */
   height: 80vh;
   border-radius: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
 .close {
@@ -189,6 +191,37 @@ button[type="submit"] {
   font-weight: bold;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%; /* Reduce width for smaller devices */
+    height: auto; /* Allow height to adjust dynamically */
+    max-height: 90vh; /* Ensure it doesn't overflow the viewport */
+    padding: 15px; /* Adjust padding */
+    margin: 10% auto; /* Center better on small screens */
+  }
+
+  .close {
+    top: 5px; /* Adjust close button positioning */
+    right: 10px;
+    font-size: 20px; /* Reduce font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%; /* Further reduce width for very small screens */
+    margin: 15% auto; /* Adjust margin for better centering */
+    padding: 10px; /* Reduce padding for smaller devices */
+  }
+
+  .close {
+    top: 5px;
+    right: 8px;
+    font-size: 18px; /* Smaller font for extra-small screens */
+  }
+}
+
 
 /* Sticky navbar */
 .sticky-navbar {
@@ -383,7 +416,41 @@ button[type="submit"] {
 }
 
 .form-floating {
-  margin-bottom: 15px;
+  position: relative;
+}
+
+.form-floating label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  color: #aaa;
+  pointer-events: none; /* Prevents interaction with the label */
+}
+
+.form-floating .form-control {
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-floating .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.form-floating .form-control:focus + label,
+.form-floating .form-control:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 8px;
+  font-size: 0.875rem;
+  color: #007bff;
+  background-color: #fff; /* Ensures label remains visible over input */
+  padding: 0 4px;
 }
 
 
@@ -543,4 +610,137 @@ p {
   .welcome-title {
     font-size: 2rem;
   }
+}
+.cart-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #343a40;
+}
+
+.empty-cart-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.cart-items {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.cart-item:hover {
+  transform: scale(1.02);
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cart-item-details {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.cart-item-name {
+  font-size: 1.1rem;
+  color: #495057;
+}
+
+.cart-item-price {
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* .remove-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+} */
+
+/* .remove-button:hover {
+  background-color: #c82333;
+} */
+
+.cart-total {
+  text-align: right;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: #495057;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+  background-color: #0056b3;
+}
+
+.back-button {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+.remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px; /* Adjust icon size */
+  color: #dc3545; /* Trash icon color */
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-btn:hover {
+  color: #c82333; /* Darker red on hover */
 }

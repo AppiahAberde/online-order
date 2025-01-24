@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons'; // Import the trash icon
 import '../App.css'; // Ensure you import your CSS file
 
 const CartPage = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
-
 
   return (
     <div className="cart-container">
@@ -21,20 +22,32 @@ const CartPage = () => {
                 <span className="cart-item-name">{item.name}</span>
                 <span className="cart-item-price">&#8373; {item.price}</span>
               </div>
-              <button className="remove-button" onClick={() => removeFromCart(index)}>Remove</button>
+              <button
+                className="remove-btn"
+                onClick={() => removeFromCart(index)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
             </li>
           ))}
         </ul>
       )}
       <div className="cart-actions">
         {cartItems.length > 0 && (
-          <button className="checkout-button" onClick={() => navigate('/checkout')}>Proceed to Checkout</button>
+          <button
+            className="checkout-button"
+            onClick={() => navigate('/checkout')}
+          >
+            Proceed to Checkout
+          </button>
         )}
-        <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+      </div>
+      <br />
+      <div>
+        <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
       </div>
     </div>
   );
 };
 
 export default CartPage;
-

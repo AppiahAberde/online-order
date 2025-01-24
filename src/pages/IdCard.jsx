@@ -5,6 +5,7 @@ const IdCard = () => {
   return (
     <div>
       <h1 className='display-5'>ID Card Replacement</h1>
+      <hr></hr>
       <IdCardList />
     </div>
   );

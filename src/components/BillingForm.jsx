@@ -3,7 +3,8 @@ import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
-import '../App.css'; // Ensure you import your CSS file
+//import '../App.css'; // Ensure you import your custom CSS file
+import './BillingForm.css'; // Additional CSS for enhanced styling
 
 const BillingForm = () => {
     const { cartItems } = useContext(CartContext);
@@ -13,7 +14,7 @@ const BillingForm = () => {
         firstName: '',
         lastName: '',
         email: '',
-        grade: ''
+        grade: '',
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalUrl, setModalUrl] = useState('');
@@ -22,7 +23,7 @@ const BillingForm = () => {
         const { name, value } = e.target;
         setBillingDetails({
             ...billingDetails,
-            [name]: value
+            [name]: value,
         });
     };
 
@@ -35,8 +36,8 @@ const BillingForm = () => {
             metadata: {
                 ...billingDetails,
                 cartItems,
-                total
-            }
+                total,
+            },
         });
 
         const config = {
@@ -46,7 +47,7 @@ const BillingForm = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            data
+            data,
         };
 
         axios.request(config)
@@ -60,13 +61,14 @@ const BillingForm = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div className='form-row mb-5'>
-                    <div className='form-floating col-md'>
-                        <span><label>Student First Name</label></span>
+        <div className="billing-form-container">
+            <h2 className="form-title">Billing Information</h2>
+            <form onSubmit={handleSubmit} className="billing-form">
+                <div className="form-row">
+                    <div className="form-control col-md">
+                        <label htmlFor="firstName">Student First Name</label>
                         <input
-                            className='form-control'
+                            className="form-control"
                             type="text"
                             id="firstName"
                             name="firstName"
@@ -75,10 +77,10 @@ const BillingForm = () => {
                             required
                         />
                     </div>
-                    <div className='form-floating col-md'>
-                        <span><label>Student Last Name</label></span>
+                    <div className="form-control col-md">
+                        <span><label htmlFor="lastName">Student Last Name</label></span>
                         <input
-                            className='form-control'
+                            className="form-control"
                             type="text"
                             id="lastName"
                             name="lastName"
@@ -88,12 +90,12 @@ const BillingForm = () => {
                         />
                     </div>
                 </div>
-                <div className='row'>
-                    <div className='col-4'>
-                        <span><label>Grade</label></span>
+
+                <div className="form-row">
+                    <div className="form-group col-md">
+                        <label htmlFor="grade">Grade</label>
                         <select
-                            className="form-select form-select-lg mb-3"
-                            aria-label="Select Grade"
+                            className="form-control"
                             name="grade"
                             value={billingDetails.grade}
                             onChange={handleChange}
@@ -101,30 +103,45 @@ const BillingForm = () => {
                         >
                             <option value="" disabled>Select Grade</option>
                             {[...Array(12)].map((_, i) => (
-                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                                <option key={i + 1} value={i + 1}>
+                                    Grade {i + 1}
+                                </option>
                             ))}
                             <option value="Staff">Staff</option>
                         </select>
                     </div>
-                    <div className='form-floating col-md'>
-                        <span><label>Email</label></span>
+                    <div className="form-control col-md">
+                        <label htmlFor="email">Payer Email</label>
                         <input
-                            className='form-control'
+                            className="form-control"
                             type="email"
                             id="email"
                             name="email"
-                            placeholder='Email'
+                            placeholder="Enter email"
                             value={billingDetails.email}
                             onChange={handleChange}
                             required
                         />
                     </div>
                 </div>
-                <div className='row'>
-                    <button type="submit">Pay</button>
-                    {isModalOpen && <Modal url={modalUrl} onClose={() => setIsModalOpen(false)} />}
+
+                <div className="form-actions">
+                    <button type="submit" className="submit-btn">
+                        Proceed to Pay
+                    </button>
+                    {isModalOpen && (
+                        <Modal url={modalUrl} onClose={() => setIsModalOpen(false)} />
+                    )}
                 </div>
-                <button type="button" className="back-button" onClick={() => navigate(-1)}>Back</button>
+                <div>
+                <button
+                        type="button"
+                        className="back-btn"
+                        onClick={() => navigate(-1)}
+                    >
+                        Back
+                    </button>
+                </div>
             </form>
         </div>
     );

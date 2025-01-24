@@ -1,24 +1,30 @@
 import React, { useState, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import Swal from 'sweetalert2'
 import '../App.css'; // Ensure you import your CSS file
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
-  const [size] = useState('Regular');
-  const [price] = useState(product.price);
+  const [price, setPrice] = useState(product.price); // Track user-defined price
 
-  // const handleSizeChange = (e) => {
-  //   const selectedSize = e.target.value;
-  //   setSize(selectedSize);
-  //   if (selectedSize === 'Large') {
-  //     setPrice(product.price * 1.1);
-  //   } else if (selectedSize === 'Extra Large') {
-  //     setPrice(product.price * 1.2);
-  //   } else {
-  //     setPrice(product.price);
-  //   }
-  // };
-  // console.log(product)
+  // Handle price input change
+  const handlePriceChange = (e) => {
+    const inputValue = parseFloat(e.target.value);
+    if (inputValue >= 0) {
+      setPrice(inputValue); // Only allow positive values
+    }
+  };
+
+  const handleAddToCart = () => {
+    addToCart({ ...product, price });
+    Swal.fire({
+      icon: 'success',
+      title: 'Item Added to Cart',
+      text: `${product.name} has been successfully added to your cart!`,
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  };
 
   return (
     <div className="product-card">
@@ -26,25 +32,26 @@ const ProductCard = ({ product }) => {
       <div className="product-details">
         <p className="product-name">{product.name}</p>
         <h5 className="product-category">{product.description}</h5>
-        <p className='product-category'>Sessions: {product.sessions}</p>
+        <p className="product-category">Sessions: {product.sessions}</p>
         <p className="product-category">Dates: {product.dates}</p>
-        <p className="product-price">Price: &#8373; {price.toFixed(2)}</p>
-        {/* <div className="form-group">
-          <label htmlFor={`size-select-${product.id}`} className="size-label">Size:</label>
-          <select
-            id={`size-select-${product.id}`}
-            className="size-select"
-            value={size}
-            onChange={handleSizeChange}
-          >
-            <option value="Regular">Regular</option>
-            <option value="Large">Large</option>
-            <option value="Extra Large">Extra Large</option>
-          </select>
-        </div> */}
+        <p className="product-price">Price: &#8373; {product.price.toFixed(2)}</p>
+        <label htmlFor="price-input">Amount to Pay (In Ghc):</label>
+        <div className="form-floating col-sm">          
+          <input
+            className="form-control"
+            type="number"
+            id="price-input"
+            name="price"
+            value={price}
+            placeholder="Enter your price"
+            onChange={handlePriceChange}
+            required
+          />
+        </div>
+
         <button
           className="add-to-cart-btn"
-          onClick={() => addToCart({ ...product, size, price })}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </button>

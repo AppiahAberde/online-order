@@ -4,7 +4,8 @@ import AsaActivityList from '../components/AsaActivityList'
 const AsaPage = () => {
   return (
     <div>
-      <h1>Asa Page</h1>
+      <h1>AfterSchool Activities</h1>
+      <hr></hr>
       <AsaActivityList />
     </div>
   );
