@@ -34,8 +34,8 @@ const FieldTripsCard = ({ product }) => {
         <h5 className="product-category">{product.description}</h5>
         {/* <p className='product-category'>Sessions: {product.sessions}</p> */}
         <p className="product-category">Dates: {product.dates}</p>
-        <p className="product-price">Price: &#8373; {price.toFixed(2)}</p>
-        <label htmlFor="price-input">Amount to Pay (In Ghc):</label>
+        <p className="product-price">Price: ${price.toFixed(2)}</p>
+        <label htmlFor="price-input">Amount to Pay (In USD):</label>
         <div className="form-floating col-sm">          
           <input
             className="form-control"

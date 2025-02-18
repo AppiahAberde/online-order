@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { createBrowserHistory } from 'history'
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';

@@ -40,7 +40,7 @@ const CartPage = () => {
             <li key={index} className="cart-item">
               <div className="cart-item-details">
                 <span className="cart-item-name">{item.name}</span>
-                <span className="cart-item-price">&#8373; {item.price}</span>
+                <span className="cart-item-price">${item.price}</span>
               </div>
               <button
                 className="remove-btn"

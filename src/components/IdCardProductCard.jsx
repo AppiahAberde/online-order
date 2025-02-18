@@ -26,22 +26,22 @@ const ProductCard = ({ product }) => {
       <div className="product-details">
         <p className="product-name">{product.name}</p>
         <h5 className="product-category">{product.description}</h5>
-        {/* <p className='product-category'>Sessions: {product.sessions}</p>
-        <p className="product-category">Dates: {product.dates}</p> */}
-        <p className="product-price">Price: &#8373; {price.toFixed(2)}</p>
-        {/* <div className="form-group">
-          <label htmlFor={`size-select-${product.id}`} className="size-label">Size:</label>
-          <select
-            id={`size-select-${product.id}`}
-            className="size-select"
-            value={size}
-            onChange={handleSizeChange}
-          >
-            <option value="Regular">Regular</option>
-            <option value="Large">Large</option>
-            <option value="Extra Large">Extra Large</option>
-          </select>
-        </div> */}
+        {/* /* <p className='product-category'>Sessions: {product.sessions}</p>
+          <p className="product-category">Dates: {product.dates}</p> */} 
+          <p className="product-price">Price: ${price.toFixed(2)}</p>
+          {/* <div className="form-group">
+            <label htmlFor={`size-select-${product.id}`} className="size-label">Size:</label>
+            <select
+              id={`size-select-${product.id}`}
+              className="size-select"
+              value={size}
+              onChange={handleSizeChange}
+            >
+              <option value="Regular">Regular</option>
+              <option value="Large">Large</option>
+              <option value="Extra Large">Extra Large</option>
+            </select>
+          </div> */}
         <button
           className="add-to-cart-btn"
           onClick={() => addToCart({ ...product, size, price })}

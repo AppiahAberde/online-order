@@ -5,7 +5,7 @@ import '../App.css';
 
 const CheckoutPage = () => {
   const { cartItems } = useContext(CartContext);
-  const [billingDetails, setBillingDetails] = useState(null);
+  const [setBillingDetails] = useState(null);
 
   const handleBillingSubmit = (details) => {
     setBillingDetails(details);
@@ -23,12 +23,12 @@ const CheckoutPage = () => {
             {cartItems.map((item, index) => (
               <li key={index} className="checkout-item">
                 <span>{item.name}</span>
-                <span>&#8373; {item.price.toFixed(2)}</span>
+                <span>${item.price.toFixed(2)}</span>
               </li>
             ))}
           </ul>
           <p className="checkout-total">
-            Total: &#8373; {cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}
+            Total: ${cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}
           </p>
         </div>
 
