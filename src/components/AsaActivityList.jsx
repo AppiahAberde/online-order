@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
+const server_url = process.env.REACT_APP_SERVER_URL
 
 const AsaActivityList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://lincolnpay.lincoln.edu.gh/api/lcs/asaactivity')
+    axios.get(`${server_url}/asaactivity`)
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);

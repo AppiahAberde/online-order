@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FieldProductCard from './fieldTripProcductCard';
+const server_url = process.env.REACT_APP_SERVER_URL
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://lincolnpay.lincoln.edu.gh/api/lcs/fieldtrips')
+    axios.get(`${server_url}/fieldtrips`)
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);

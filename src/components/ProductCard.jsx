@@ -34,9 +34,9 @@ const ProductCard = ({ product }) => {
         <h5 className="product-category">{product.description}</h5>
         <p className="product-category">Sessions: {product.sessions}</p>
         <p className="product-category">Dates: {product.dates}</p>
-        <p className="product-price">Price: &#8373; {product.price.toFixed(2)}</p>
+        <p className="product-price"><span>Price: &#8373; {product.price.toFixed(2)}</span></p> 
         <label htmlFor="price-input">Amount to Pay (In Ghc):</label>
-        <div className="form-floating col-sm">          
+        <div className="form-floating col-sm">
           <input
             className="form-control"
             type="number"

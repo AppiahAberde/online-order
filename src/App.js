@@ -14,7 +14,7 @@ import IdCard from './pages/IdCard';
 import './App.css';
 
 const App = () => {
-  const { pathname } = useLocation
+  //const { pathname } = useLocation
   const history = createBrowserHistory()
   return (
     <div className='App'>
@@ -39,4 +39,3 @@ const App = () => {
 };
 
 export default App;
-
