@@ -13,6 +13,14 @@ import IdCard from './pages/IdCard';
 
 import './App.css';
 
+/**
+ * The main App component that sets up the routing for the application.
+ * It uses `createBrowserHistory` for custom history management and wraps the application
+ * with `CartProvider` for state management related to the cart.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered App component.
+ */
 const App = () => {
   //const { pathname } = useLocation
   const history = createBrowserHistory()

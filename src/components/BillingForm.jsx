@@ -6,6 +6,36 @@ import './BillingForm.css';
 
 const server_url = process.env.REACT_APP_SERVER_URL;
 
+/**
+ * BillingForm component handles the billing information form and payment initiation.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <BillingForm />
+ * )
+ * 
+ * @returns {JSX.Element} The rendered BillingForm component.
+ * 
+ * @description
+ * This component renders a form for collecting billing information including the student's first name, last name, grade, and payer's email.
+ * It provides two payment options: Pay with Card and Pay with MoMo (Mobile Money).
+ * 
+ * @function handleChange
+ * Handles changes to the form inputs and updates the billingDetails state.
+ * 
+ * @function card_handleSubmit
+ * Initiates the payment process using Stripe when the "Pay with Card" button is clicked.
+ * 
+ * @function momo_handleSubmit
+ * Initiates the payment process using Paystack when the "Pay with MoMo" button is clicked.
+ * 
+ * @returns {void}
+ * 
+ * @example
+ * <button type="button" onClick={card_handleSubmit} className="submit-btn">Pay with Card</button>
+ * <button type="button" onClick={momo_handleSubmit} className="submit-btn">Pay with MoMo</button>
+ */
 const BillingForm = () => {
     const { cartItems } = useContext(CartContext);
     const navigate = useNavigate();
@@ -45,19 +75,19 @@ const BillingForm = () => {
         const total = cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
         try {
             const rateResponse = await axios.get(`${server_url}/ghsrate`);
-            const rate = parseFloat(rateResponse.data.rate);
+            const rate = rateResponse.data.rate;
+            console.log(rate)
             if (isNaN(rate)) {
                 throw new Error("Invalid exchange rate received.");
             }
 
             const response = await axios.post(`${server_url}/paystackinitiate`, {
                 email: billingDetails.email,
-                amount: (parseFloat(total) * rate * 100).toFixed(2),
+                amount: (parseFloat(total) * rate * 100).toFixed(0),
                 metadata: { ...billingDetails, cartItems, total },
             }, { headers: { 'Content-Type': 'application/json' } });
-
             const authorizationUrl = response.data.data.authorization_url;
-            console.log("Authorization URL:", authorizationUrl);
+            //console.log("Authorization URL:", authorizationUrl);
 
             if (authorizationUrl) {
                 window.open(authorizationUrl, '_blank');

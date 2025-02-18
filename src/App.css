@@ -1,4 +1,4 @@
-/* App.css */
+/* Cart page styles */
 
 /* Reset and base styles */
 body, h1, h2, h3, p, ul, li, button, input, form, label {
@@ -39,8 +39,8 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color:  rgb(58, 76, 139);
-  color: rgb(58, 76, 139);
+  background-color:  #3a4c8b;
+  color: white;
 }
 
 .navbar h1 {

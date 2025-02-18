@@ -4,6 +4,18 @@ import ProductCard from './ProductCard';
 
 const server_url = process.env.REACT_APP_SERVER_URL
 
+/**
+ * AsaActivityList component fetches a list of rental products from the server
+ * and displays them using the ProductCard component.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AsaActivityList />
+ * )
+ *
+ * @returns {JSX.Element} A div containing a list of ProductCard components.
+ */
 const AsaActivityList = () => {
   const [products, setProducts] = useState([]);
 
