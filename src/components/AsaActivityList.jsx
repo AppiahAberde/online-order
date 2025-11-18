@@ -32,7 +32,7 @@ const AsaActivityList = () => {
       mounted = false
       controller.abort()
     }
-  }, [server_url])
+  }, [])
 
   if (loading) return <div className="product-list">Loading...</div>
   if (error) return <div className="product-list">Error loading activities.</div>

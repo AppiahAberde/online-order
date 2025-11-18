@@ -17,8 +17,7 @@ const Navbar = () => {
     <nav className="navbar">
       {/* Logo */}
       <Link className="logo-link" to="/">
-        {/* <img src={logo} alt="Logo" className="navbar-logo" /> */}
-        {/* <h1 className="logo-text">MyStore</h1> */}
+        <h1 className="logo-text">Online Order</h1>
       </Link>
 
       {/* Menu Icon for Mobile */}

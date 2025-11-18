@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, forwardRef, useImperativeHandle } from 'react';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -6,37 +6,8 @@ import './BillingForm.css';
 
 const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3000/lcs';
 
-/**
- * BillingForm component handles the billing information form and payment initiation.
- * 
- * @component
- * @example
- * return (
- *   <BillingForm />
- * )
- * 
- * @returns {JSX.Element} The rendered BillingForm component.
- * 
- * @description
- * This component renders a form for collecting billing information including the student's first name, last name, grade, and payer's email.
- * It provides two payment options: Pay with Card and Pay with MoMo (Mobile Money).
- * 
- * @function handleChange
- * Handles changes to the form inputs and updates the billingDetails state.
- * 
- * @function card_handleSubmit
- * Initiates the payment process using Stripe when the "Pay with Card" button is clicked.
- * 
- * @function momo_handleSubmit
- * Initiates the payment process using Paystack when the "Pay with MoMo" button is clicked.
- * 
- * @returns {void}
- * 
- * @example
- * <button type="button" onClick={card_handleSubmit} className="submit-btn">Pay with Card</button>
- * <button type="button" onClick={momo_handleSubmit} className="submit-btn">Pay with MoMo</button>
- */
-const BillingForm = () => {
+// BillingForm component - collects student/payer info and initiates payment via Stripe or Paystack
+const BillingForm = forwardRef(({ hideSummary = false }, ref) => {
     const { cartItems } = useContext(CartContext);
     const navigate = useNavigate();
 
@@ -46,6 +17,7 @@ const BillingForm = () => {
         email: '',
         grade: '',
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,7 +25,9 @@ const BillingForm = () => {
     };
 
     const handleCardSubmit = async (e) => {
-        e.preventDefault();
+        if (e && e.preventDefault) e.preventDefault();
+        if (!billingDetails.email || cartItems.length === 0) return;
+        setIsSubmitting(true);
         const total = cartItems.reduce((sum, item) => sum + Number(item.price || 0), 0);
         const amountInCents = Math.round(total * 100);
 
@@ -76,11 +50,15 @@ const BillingForm = () => {
             }
         } catch (error) {
             console.error('Payment initiation error:', error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     const handleMomoSubmit = async (e) => {
-        e.preventDefault();
+        if (e && e.preventDefault) e.preventDefault();
+        if (!billingDetails.email || cartItems.length === 0) return;
+        setIsSubmitting(true);
         const total = cartItems.reduce((sum, item) => sum + Number(item.price || 0), 0);
         const amountInCents = Math.round(total * 100);
 
@@ -103,47 +81,116 @@ const BillingForm = () => {
             }
         } catch (error) {
             console.error('Error during payment initiation:', error.message || error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
+    // expose methods to parent via ref
+    useImperativeHandle(ref, () => ({
+        submitCard: () => handleCardSubmit && handleCardSubmit(),
+        submitMomo: () => handleMomoSubmit && handleMomoSubmit(),
+    }));
+
     return (
-        <div className="billing-form-container">
-            <h2 className="form-title">Billing Information</h2>
-            <form className="billing-form">
-                <div className="form-row">
-                    <div className="form-control col-md">
-                        <label htmlFor="firstName">Student First Name</label>
-                        <input type="text" id="firstName" name="firstName" value={billingDetails.firstName} onChange={handleChange} required />
+        <form className="billing-form" onSubmit={(e) => e.preventDefault()}>
+            {/* Personal Information Section */}
+            <div className="form-section">
+                <h3 className="section-label">Personal Information</h3>
+                <div className="form-grid">
+                    <div className="form-group">
+                        <label htmlFor="firstName">First Name</label>
+                        <input 
+                            type="text" 
+                            id="firstName" 
+                            name="firstName" 
+                            value={billingDetails.firstName} 
+                            onChange={handleChange} 
+                            placeholder="John"
+                            required 
+                        />
                     </div>
-                    <div className="form-control col-md">
-                        <label htmlFor="lastName">Student Last Name</label>
-                        <input type="text" id="lastName" name="lastName" value={billingDetails.lastName} onChange={handleChange} required />
+                    <div className="form-group">
+                        <label htmlFor="lastName">Last Name</label>
+                        <input 
+                            type="text" 
+                            id="lastName" 
+                            name="lastName" 
+                            value={billingDetails.lastName} 
+                            onChange={handleChange} 
+                            placeholder="Doe"
+                            required 
+                        />
                     </div>
                 </div>
-                <div className="form-row">
-                    <div className="form-group col-md">
-                        <label htmlFor="grade">Grade</label>
-                        <select name="grade" value={billingDetails.grade} onChange={handleChange} required>
-                            <option value="" disabled>Select Grade</option>
+            </div>
+
+            {/* School Information Section */}
+            <div className="form-section">
+                <h3 className="section-label">School Information</h3>
+                <div className="form-grid">
+                    <div className="form-group">
+                        <label htmlFor="grade">Grade / Level</label>
+                        <select 
+                            name="grade" 
+                            id="grade"
+                            value={billingDetails.grade} 
+                            onChange={handleChange} 
+                            required
+                        >
+                            <option value="" disabled>Select your grade</option>
                             {[...Array(12)].map((_, i) => <option key={i + 1} value={i + 1}>Grade {i + 1}</option>)}
                             <option value="Staff">Staff</option>
                         </select>
                     </div>
-                    <div className="form-control col-md">
-                        <label htmlFor="email">Payer Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter email" value={billingDetails.email} onChange={handleChange} required />
+                    <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="you@example.com"
+                            value={billingDetails.email} 
+                            onChange={handleChange} 
+                            required 
+                        />
                     </div>
                 </div>
-                <div className="form-actions">
-                    <button type="button" onClick={handleCardSubmit} className="submit-btn" disabled={cartItems.length === 0 || !billingDetails.email}>Pay with Card</button>
-                    <button type="button" onClick={handleMomoSubmit} className="submit-btn" disabled={cartItems.length === 0 || !billingDetails.email}>Pay with MoMo</button>
-                </div>
-                <div>
-                    <button type="button" className="back-btn" onClick={() => navigate(-1)}>Back</button>
-                </div>
-            </form>
-        </div>
+            </div>
+
+            {/* Payment Actions */}
+            {/* <div className="form-actions">
+                <button 
+                    type="button" 
+                    onClick={handleCardSubmit} 
+                    className="btn-action btn-card"
+                    disabled={isSubmitting || cartItems.length === 0 || !billingDetails.email} 
+                    aria-busy={isSubmitting}
+                >
+                    {isSubmitting ? 'Processing...' : 'Proceed to Card Payment'}
+                </button>
+                <button 
+                    type="button" 
+                    onClick={handleMomoSubmit} 
+                    className="btn-action btn-momo"
+                    disabled={isSubmitting || cartItems.length === 0 || !billingDetails.email} 
+                    aria-busy={isSubmitting}
+                >
+                    {isSubmitting ? 'Processing...' : 'Proceed to Mobile Money'}
+                </button>
+            </div> */}
+
+            {/* Back Button */}
+            <button 
+                type="button" 
+                className="btn-back" 
+                onClick={() => navigate(-1)}
+                disabled={isSubmitting}
+            >
+                ← Back to Cart
+            </button>
+        </form>
     );
-};
+});
 
 export default BillingForm;

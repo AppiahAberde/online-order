@@ -1,19 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import Swal from 'sweetalert2'
 import '../App.css'; // Ensure you import your CSS file
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
-  const [price, setPrice] = useState(product.price); // Track user-defined price
-
-  // Handle price input change
-  const handlePriceChange = (e) => {
-    const inputValue = parseFloat(e.target.value);
-    if (inputValue >= 0) {
-      setPrice(inputValue); // Only allow positive values
-    }
-  };
+  const price = Number(product.price || 0);
 
   const handleAddToCart = () => {
     addToCart({ ...product, price });
@@ -34,27 +26,17 @@ const ProductCard = ({ product }) => {
         <h5 className="product-category">{product.description}</h5>
         <p className="product-category">Sessions: {product.sessions}</p>
         <p className="product-category">Dates: {product.dates}</p>
-        <p className="product-price"><span>Price: Ghc {product.price.toFixed(2)}</span></p> 
-        {/* <label htmlFor="price-input">Amount to Pay (In USD):</label> */}
-        <div className="form-floating col-sm">
-          <input
-            className="form-control"
-            type="number"
-            id="price-input"
-            name="price"
-            value={price}
-            placeholder="Enter your price"
-            onChange={handlePriceChange}
-            required
-          />
-        </div>
+        <p className="product-price"><span>Price: Ghc {price.toFixed(2)}</span></p>
 
-        <button
-          className="add-to-cart-btn"
-          onClick={handleAddToCart}
-        >
-          Add to Cart
-        </button>
+        <div className="product-actions">
+          <button
+            className="add-to-cart-btn"
+            onClick={handleAddToCart}
+            aria-label={`Add ${product.name} to cart`}
+          >
+            Add to Cart
+          </button>
+        </div>
       </div>
     </div>
   );

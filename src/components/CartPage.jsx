@@ -10,6 +10,7 @@ const CartPage = () => {
   const navigate = useNavigate();
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+  const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
   const isEmpty = cartItems.length === 0;
 
   const handleRemove = (index) => {
@@ -20,55 +21,139 @@ const CartPage = () => {
     if (newQty > 0) updateQuantity(index, newQty);
   };
 
+  if (isEmpty) {
+    return (
+      <div className="cart-container">
+        <div className="cart-header">
+          <h1 className="cart-title">Shopping Cart</h1>
+        </div>
+
+        <div className="empty-state">
+          <div className="empty-icon">🛒</div>
+          <h2 className="empty-title">Your cart is empty</h2>
+          <p className="empty-desc">Start shopping to add items to your cart</p>
+          <button className="btn-start-shopping" onClick={() => navigate('/')}>
+            Start Shopping
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="cart-container">
-      <h1>Your Cart</h1>
+      {/* Header */}
+      <div className="cart-header">
+        <div className="header-top">
+          <h1 className="cart-title">Shopping Cart</h1>
+          <button className="btn-back-header" onClick={() => navigate(-1)}>
+            ← Continue Shopping
+          </button>
+        </div>
+        <div className="header-meta">
+          <span className="item-count">{totalItems} {totalItems === 1 ? 'item' : 'items'} in cart</span>
+        </div>
+      </div>
 
-      {isEmpty ? (
-        <p className="empty-message">Your cart is empty.</p>
-      ) : (
-        <>
-          <ul className="cart-items">
+      {/* Main Content */}
+      <div className="cart-main">
+        {/* Items List */}
+        <div className="cart-items-section">
+          <div className="items-header">
+            <span>Items</span>
+            <span className="qty-price-header">Quantity × Price</span>
+          </div>
+
+          <div className="cart-items">
             {cartItems.map((item, index) => (
-              <li key={index} className="cart-item fade-in">
-                <div className="cart-item-details">
-                  <span className="cart-item-name">{item.name}</span>
-                  <div className="cart-item-qty-price">
+              <div key={index} className="cart-item">
+                <div className="item-details">
+                  <h3 className="item-name">{item.name}</h3>
+                  <span className="item-unit-price">₵{Number(item.price).toFixed(2)} each</span>
+                </div>
+
+                <div className="item-controls">
+                  <div className="quantity-control">
+                    <button
+                      className="qty-btn"
+                      onClick={() => handleQuantityChange(index, (item.quantity || 1) - 1)}
+                      aria-label="Decrease quantity"
+                    >
+                      −
+                    </button>
                     <input
                       type="number"
                       min="1"
                       value={item.quantity || 1}
-                      onChange={(e) => handleQuantityChange(index, parseInt(e.target.value))}
+                      onChange={(e) => handleQuantityChange(index, parseInt(e.target.value) || 1)}
                       className="quantity-input"
+                      aria-label="Item quantity"
                     />
-                    <span className="cart-item-price">Ghc {(item.price * (item.quantity || 1)).toFixed(2)}</span>
+                    <button
+                      className="qty-btn"
+                      onClick={() => handleQuantityChange(index, (item.quantity || 1) + 1)}
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
                   </div>
+
+                  <span className="item-total-price">₵{(item.price * (item.quantity || 1)).toFixed(2)}</span>
+
+                  <button
+                    className="remove-btn"
+                    aria-label={`Remove ${item.name}`}
+                    onClick={() => handleRemove(index)}
+                    title="Remove from cart"
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
                 </div>
-
-                <button
-                  className="remove-btn"
-                  aria-label={`Remove ${item.name}`}
-                  onClick={() => handleRemove(index)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
+        </div>
 
-          <div className="cart-summary">
-            <span>Total: Ghc {totalPrice.toFixed(2)}</span>
-            <button className="checkout-button" onClick={() => navigate('/checkout')}>
+        {/* Order Summary Sidebar */}
+        <div className="cart-summary-sidebar">
+          <div className="summary-card">
+            <h2 className="summary-title">Order Summary</h2>
+
+            <div className="summary-breakdown">
+              <div className="breakdown-row">
+                <span>Subtotal</span>
+                <span>₵{totalPrice.toFixed(2)}</span>
+              </div>
+              <div className="breakdown-row">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <div className="breakdown-row">
+                <span>Tax</span>
+                <span>₵0.00</span>
+              </div>
+            </div>
+
+            <div className="summary-total">
+              <span>Total</span>
+              <span className="total-amount">₵{totalPrice.toFixed(2)}</span>
+            </div>
+
+            <button
+              className="btn-checkout"
+              onClick={() => navigate('/checkout')}
+            >
               Proceed to Checkout
             </button>
-          </div>
-        </>
-      )}
 
-      <div className="back-container">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          Back
-        </button>
+            <button
+              className="btn-continue"
+              onClick={() => navigate('/')}
+            >
+              Continue Shopping
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
