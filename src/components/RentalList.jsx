@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 
-const server_url = process.env.REACT_APP_SERVER_URL
+const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3000/lcs'
+
 
 /**
  * AsaActivityList component fetches a list of rental products from the server

@@ -1,0 +1,127 @@
+.cart-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.empty-message {
+  text-align: center;
+  color: #777;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between; /* item on left, trash on right */
+  align-items: center;
+  background: #fff;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+.cart-item-details {
+  flex: 1; /* make details take available space */
+  overflow: hidden; /* prevent overflow */
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-name {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* truncate if too long */
+}
+
+.cart-item-qty-price {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.remove-btn {
+  background: #ff4d4d;
+  border: none;
+  padding: 0.25rem 0.35rem; /* compact */
+  border-radius: 50%; /* circular */
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem; /* smaller icon */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* prevent shrinking */
+  margin-left: 1rem;
+  transition: background 0.2s;
+}
+
+.remove-btn:hover {
+  background: #ff1a1a;
+}
+
+.remove-btn svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.checkout-button {
+  background: #0074d4;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.checkout-button:hover {
+  background: #005bb5;
+}
+
+.back-container {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.back-btn {
+  background: #ccc;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: #999;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+

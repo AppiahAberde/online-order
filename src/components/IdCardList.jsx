@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import IdCardProductList from './IdCardProductCard'
-const server_url = process.env.REACT_APP_SERVER_URL
+const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3000/lcs'
+
 
 const IdCardList = () => {
   const [products, setProducts] = useState([]);

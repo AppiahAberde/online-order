@@ -38,8 +38,8 @@ function Index() {
 
         <div className="service-card" onClick={goToAsaPage}>
           {/* <img src="https://lincolnpay.lincoln.edu.gh/static/media/Receivables%20listing%20for%20Paystack%20Tabs-07.jpg" alt="After School Activity" className="service-icon" /> */}
-          <h2>After School Activities</h2>
-          <p>Sign up for after-school programs</p>
+          <h2>Activities Payment</h2>
+          <p>Make payments for Lincoln Fund, ASA, WAISAL, and summer camp</p>
         </div>
 
         <div className="service-card" onClick={goToRentalPage}>
@@ -50,7 +50,7 @@ function Index() {
 
         <div className="service-card" onClick={goToIdCard}>
           {/* <img src="idcard-icon.png" alt="ID Card Replacement" className="service-icon" /> */}
-          <h2>ID Card Replacement</h2>
+          <h2>ID Card Replacement / Yearbook Payment</h2>
           <p>Request a replacement for your ID card</p>
         </div>
       </div>

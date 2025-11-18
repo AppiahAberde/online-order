@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
         <h5 className="product-category">{product.description}</h5>
         {/* /* <p className='product-category'>Sessions: {product.sessions}</p>
           <p className="product-category">Dates: {product.dates}</p> */} 
-          <p className="product-price">Price: ${price.toFixed(2)}</p>
+          <p className="product-price">Price: Ghc{price.toFixed(2)}</p>
           {/* <div className="form-group">
             <label htmlFor={`size-select-${product.id}`} className="size-label">Size:</label>
             <select

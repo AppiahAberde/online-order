@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './BillingForm.css';
 
-const server_url = process.env.REACT_APP_SERVER_URL;
+const server_url = process.env.REACT_APP_SERVER_URL || 'http://localhost:3000/lcs';
 
 /**
  * BillingForm component handles the billing information form and payment initiation.
@@ -52,48 +52,57 @@ const BillingForm = () => {
         setBillingDetails(prevDetails => ({ ...prevDetails, [name]: value }));
     };
 
-    const card_handleSubmit = async (e) => {
+    const handleCardSubmit = async (e) => {
         e.preventDefault();
-        const total = cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
-        try {
-            const response = await axios.post(`${server_url}/stripeinitiate`, {
-                email: billingDetails.email,
-                amount: (parseFloat(total) * 100).toFixed(2),
-                metadata: { ...billingDetails, cartItems, total },
-            }, { headers: { 'Content-Type': 'application/json' } });
+        const total = cartItems.reduce((sum, item) => sum + Number(item.price || 0), 0);
+        const amountInCents = Math.round(total * 100);
 
-            if (response.data.url) {
-                window.open(response.data.url, '_blank');
+        try {
+            const response = await axios.post(
+                `${server_url}/stripeinitiate`,
+                {
+                    email: billingDetails.email,
+                    amount: amountInCents,
+                    metadata: { ...billingDetails, cartItems, total }
+                },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
+
+            const redirectUrl = (response.data && (response.data.url || response.data.checkout_url || response.data.sessionUrl)) || null;
+            if (redirectUrl) {
+                window.open(redirectUrl, '_blank');
+            } else {
+                console.warn('No redirect URL returned from stripe initiation', response.data);
             }
         } catch (error) {
-            console.error("Payment initiation error:", error);
+            console.error('Payment initiation error:', error);
         }
     };
 
-    const momo_handleSubmit = async (e) => {
+    const handleMomoSubmit = async (e) => {
         e.preventDefault();
-        const total = cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+        const total = cartItems.reduce((sum, item) => sum + Number(item.price || 0), 0);
+        const amountInCents = Math.round(total * 100);
+
         try {
-            const rateResponse = await axios.get(`${server_url}/ghsrate`);
-            const rate = rateResponse.data.rate;
-            console.log(rate)
-            if (isNaN(rate)) {
-                throw new Error("Invalid exchange rate received.");
-            }
+            const response = await axios.post(
+                `${server_url}/paystackinitiate`,
+                {
+                    email: billingDetails.email,
+                    amount: amountInCents,
+                    metadata: { ...billingDetails, cartItems, total }
+                },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
 
-            const response = await axios.post(`${server_url}/paystackinitiate`, {
-                email: billingDetails.email,
-                amount: (parseFloat(total) * rate * 100).toFixed(0),
-                metadata: { ...billingDetails, cartItems, total },
-            }, { headers: { 'Content-Type': 'application/json' } });
-            const authorizationUrl = response.data.data.authorization_url;
-            //console.log("Authorization URL:", authorizationUrl);
-
+            const authorizationUrl = response?.data?.data?.authorization_url;
             if (authorizationUrl) {
                 window.open(authorizationUrl, '_blank');
+            } else {
+                console.warn('No authorization_url returned from paystack initiation', response.data);
             }
         } catch (error) {
-            console.error("Error during payment initiation:", error.message);
+            console.error('Error during payment initiation:', error.message || error);
         }
     };
 
@@ -126,8 +135,8 @@ const BillingForm = () => {
                     </div>
                 </div>
                 <div className="form-actions">
-                    <button type="button" onClick={card_handleSubmit} className="submit-btn">Pay with Card</button>
-                    <button type="button" onClick={momo_handleSubmit} className="submit-btn">Pay with MoMo</button>
+                    <button type="button" onClick={handleCardSubmit} className="submit-btn" disabled={cartItems.length === 0 || !billingDetails.email}>Pay with Card</button>
+                    <button type="button" onClick={handleMomoSubmit} className="submit-btn" disabled={cartItems.length === 0 || !billingDetails.email}>Pay with MoMo</button>
                 </div>
                 <div>
                     <button type="button" className="back-btn" onClick={() => navigate(-1)}>Back</button>
