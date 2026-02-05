@@ -10,6 +10,8 @@ import Index from './pages/Index'
 import AsaPage from './pages/Asa';
 import RentalPage from './pages/Rental';
 import IdCard from './pages/IdCard';
+import Success from './pages/Success';
+import Failure from './pages/Failure';
 
 import './App.css';
 
@@ -38,6 +40,8 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/rental" element={<RentalPage />} />
             <Route path="/idcard" element={<IdCard />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/failure" element={<Failure />} />
             {/* <Redirect from="*" to="/" /> */}
           </Routes>
         </Router>
