@@ -396,7 +396,393 @@ button[type="submit"] {
   font-size: 1rem;
 }
 
+/* Price Input Styling */
+.price-input-wrapper {
+  margin: 20px 0;
+}
+
+.price-input-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.price-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 4px 4px 4px 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.price-input-container:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.15);
+  background: #ffffff;
+}
+
+.currency-symbol {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #007bff;
+  margin-right: 8px;
+  user-select: none;
+}
+
+.price-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #212529;
+  padding: 12px 8px;
+  outline: none;
+  width: 100%;
+}
+
+.price-input::placeholder {
+  color: #adb5bd;
+  font-weight: 400;
+}
+
+/* Remove spinner arrows from number input */
+.price-input::-webkit-outer-spin-button,
+.price-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.price-input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .add-to-cart-btn {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.add-to-cart-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+/* Page Container Styling */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e3f2fd;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #5dade2;
+  margin-bottom: 12px;
+  text-shadow: none;
+}
+
+.page-description {
+  font-size: 1.1rem;
+  color: #5dade2;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.no-products {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+.no-products p {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 12px;
+  line-height: 1.8;
+}
+
+.no-products p:first-child {
+  font-weight: 600;
+  color: #495057;
+  font-size: 1.2rem;
+}
+
+/* Scholarship Form Styling */
+.scholarship-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.scholarship-form {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-section {
+  margin-bottom: 35px;
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+}
+
+.form-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.contribution-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.contribution-type-card {
+  position: relative;
+  cursor: pointer;
+  border: 3px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.contribution-type-card:hover {
+  border-color: #007bff;
+  background: #f0f7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.contribution-type-card.active {
+  border-color: #007bff;
+  background: linear-gradient(135deg, #e3f2ff 0%, #f0f7ff 100%);
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.2);
+}
+
+.contribution-type-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.type-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.type-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.type-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.type-description {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.contribution-type-card.active .type-name {
+  color: #007bff;
+}
+
+.amount-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scholarship-input {
+  max-width: 100%;
+}
+
+.amount-note {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin: 0;
+  padding-left: 8px;
+  font-style: italic;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: #6c757d;
+  border: 2px solid #e0e0e0;
+}
+
+.btn-secondary:hover {
+  background: #f8f9fa;
+  border-color: #6c757d;
+  color: #495057;
+}
+
+.contribution-info {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-radius: 16px;
+  padding: 30px;
+  border-left: 4px solid #ff9800;
+}
+
+.contribution-info h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e65100;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.contribution-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contribution-info li {
+  padding: 10px 0;
+  font-size: 1rem;
+  color: #5d4037;
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.contribution-info li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .page-description {
+    font-size: 1rem;
+  }
+  
+  .page-header {
+    padding: 30px 15px;
+    margin-bottom: 30px;
+  }
+
+  .scholarship-form {
+    padding: 25px 20px;
+  }
+
+  .contribution-types {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contribution-info {
+    padding: 20px;
+  }
+}
+
+.add-to-cart-btn-old {
   background-color: #007bff;
 }
 

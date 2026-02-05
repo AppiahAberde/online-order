@@ -21,6 +21,10 @@ function Index() {
     navigate('idcard');
   };
 
+  const goToScholarship = () => {
+    navigate('/scholarship');
+  };
+
   return (
     <div className="index-container">
       {/* Header Section with Logo */}
@@ -52,6 +56,12 @@ function Index() {
           {/* <img src="idcard-icon.png" alt="ID Card Replacement" className="service-icon" /> */}
           <h2>ID Card Replacement / Yearbook Payment</h2>
           <p>Request a replacement for your ID card</p>
+        </div>
+
+        <div className="service-card" onClick={goToScholarship}>
+          {/* <img src="scholarship-icon.png" alt="DD Scholarship" className="service-icon" /> */}
+          <h2>DD Scholarship / Lincoln Fund</h2>
+          <p>Contribute to scholarships and Lincoln Fund</p>
         </div>
       </div>
     </div>
