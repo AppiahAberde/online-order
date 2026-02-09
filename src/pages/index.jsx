@@ -60,7 +60,7 @@ function Index() {
 
         <div className="service-card" onClick={goToScholarship}>
           {/* <img src="scholarship-icon.png" alt="DD Scholarship" className="service-icon" /> */}
-          <h2>DD Scholarship / Lincoln Fund</h2>
+          <h2>DDL Scholarship</h2>
           <p>Contribute to scholarships and Lincoln Fund</p>
         </div>
       </div>

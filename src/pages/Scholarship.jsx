@@ -62,10 +62,10 @@ const Scholarship = () => {
   return (
     <div className="page-container">
       <header className="page-header">
-        <h1 className="page-title">DDL Scholarship </h1>
-        {/* <p className="page-description">
+        <h1 className="page-title">DD Scholarship / Lincoln Fund</h1>
+        <p className="page-description">
           Support education through DD Scholarship and Lincoln Fund contributions
-        </p> */}
+        </p>
       </header>
 
       <div className="scholarship-form-container">
@@ -103,6 +103,16 @@ const Scholarship = () => {
             </button>
           </div>
         </form>
+
+        <div className="contribution-info">
+          <h4>Why Contribute?</h4>
+          <ul>
+            <li>💡 Support deserving students in their educational journey</li>
+            <li>🌟 Help improve school facilities and resources</li>
+            <li>🤝 Make a lasting impact on the Lincoln community</li>
+            <li>📚 Enable access to quality education for all</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
